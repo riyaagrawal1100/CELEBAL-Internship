@@ -1,23 +1,33 @@
-Image Denoising using Convolutional Autoencoder
+# Image Denoising using Convolutional Autoencoder
 
-Project Overview
+## Project Overview
+
 This project implements a Convolutional Autoencoder to remove Gaussian noise from handwritten digit images using the MNIST dataset.
+
 The model learns to reconstruct clean images from noisy inputs using an encoder-decoder architecture.
 
-Dataset
+---
+
+## Dataset
+
 - MNIST Dataset
 - 60,000 training images
 - 10,000 testing images
 - Image Size: 28×28 pixels
 
-Technologies Used
+---
+
+## Technologies Used
+
 - Python
 - TensorFlow / Keras
 - NumPy
 - Matplotlib
 - Google Colab
 
-Model Architecture
+---
+
+## Model Architecture
 
 Encoder:
 - Conv2D (32 filters)
@@ -32,18 +42,29 @@ Decoder:
 - UpSampling2D
 - Conv2D (1 filter, Sigmoid)
 
-Training Configuration
+---
+
+## Training Configuration
+
 - Optimizer: Adam
 - Loss Function: Binary Crossentropy
 - Epochs: 20
 - Batch Size: 128
 
-Results
+---
+
+## Results
+
 The model successfully removes Gaussian noise from MNIST images while preserving the digit structure.
+
 Training Loss: ~0.099
+
 Validation Loss: ~0.098
 
-Project Workflow
+---
+
+## Project Workflow
+
 1. Load MNIST dataset
 2. Normalize images
 3. Add Gaussian noise
@@ -53,6 +74,7 @@ Project Workflow
 7. Generate denoised images
 8. Visualize results
 
+---
 
 ## Author
 
