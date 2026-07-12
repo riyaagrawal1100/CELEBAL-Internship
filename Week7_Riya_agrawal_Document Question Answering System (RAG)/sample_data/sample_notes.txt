@@ -1,0 +1,70 @@
+Retrieval-Augmented Generation (RAG) Notes
+
+What is RAG?
+Retrieval-Augmented Generation, or RAG, is an AI architecture that combines
+information retrieval with text generation. Instead of relying only on the
+knowledge a language model learned during training, a RAG system first
+searches an external knowledge source, such as a set of documents, and then
+gives the retrieved information to the language model as context before it
+generates a final answer. This grounds the model's response in real,
+verifiable data rather than in whatever the model happened to memorize.
+
+Why RAG matters
+Large language models can produce fluent but incorrect answers, a problem
+often called hallucination. RAG reduces hallucination by forcing the model
+to base its answer on retrieved evidence. It also allows a language model to
+answer questions about private, domain-specific, or very recent information
+that was never part of its training data, such as a company's internal
+policy documents, a person's resume, or a newly published research paper.
+
+The main stages of a RAG pipeline
+1. Document Ingestion: raw documents such as PDFs, text files, or web pages
+   are loaded and converted into plain text.
+2. Text Chunking: the text is split into smaller, overlapping pieces called
+   chunks. Chunking improves retrieval accuracy because it lets the system
+   find a small, focused passage instead of an entire document.
+3. Embedding Creation: each chunk is converted into a numerical vector that
+   captures its semantic meaning. Chunks with similar meaning end up with
+   vectors that are close together in that vector space.
+4. Vector Database: all of the chunk embeddings are stored in a vector
+   database or vector store, which is optimized for fast similarity search
+   over thousands or millions of vectors.
+5. Query Processing: when a user asks a question, that question is also
+   converted into an embedding using the same embedding model.
+6. Context Retrieval: the system compares the question's embedding against
+   every stored chunk embedding and returns the most similar chunks, usually
+   using cosine similarity or a similar distance metric.
+7. Answer Generation: the retrieved chunks are inserted into a prompt along
+   with the original question, and a language model generates a final,
+   grounded answer.
+
+Embeddings and vector similarity
+An embedding is a list of numbers, a vector, that represents the meaning of
+a piece of text. Two pieces of text about similar topics will have embedding
+vectors that point in similar directions. Cosine similarity is a common way
+to measure how similar two vectors are; a cosine similarity close to 1 means
+the vectors are nearly identical in direction, while a cosine similarity
+close to 0 means they are unrelated.
+
+Common ways to improve a RAG system
+Developers can improve retrieval quality by experimenting with different
+chunk sizes, trying different embedding models, or combining keyword search
+with vector search in what is called hybrid search. Re-ranking is another
+common improvement, where a second, more expensive model re-scores the top
+retrieved chunks to push the most relevant ones to the top before they are
+sent to the language model. Different generation models can also be swapped
+in to compare answer quality, cost, and speed.
+
+Where RAG is used
+RAG systems are widely used to build chatbots that can answer questions
+about a company's own documentation, knowledge assistants that help
+employees search internal wikis, enterprise search tools, and AI-powered
+documentation tools that let users ask natural language questions about a
+product manual or research paper instead of manually searching through it.
+
+Summary
+In short, a RAG system works by retrieving relevant information from a
+custom set of documents and then using a language model to generate an
+answer grounded in that retrieved information. This combination of
+retrieval and generation is what makes RAG systems more accurate and more
+useful for private or specialized data than a language model acting alone.
