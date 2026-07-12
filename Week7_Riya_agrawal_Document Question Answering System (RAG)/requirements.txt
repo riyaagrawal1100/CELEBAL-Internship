@@ -1,0 +1,16 @@
+# Core Dependencies
+numpy>=1.24
+scikit-learn>=1.3
+pypdf>=4.0
+
+# Optional: Better Embeddings
+# Uncomment if you want to use Sentence Transformers
+# sentence-transformers>=2.2
+
+# Optional: LLM APIs
+# Uncomment if using OpenAI or Anthropic
+# openai>=1.0
+# anthropic>=0.34
+
+# Optional: Streamlit Web Interface
+# streamlit>=1.30
