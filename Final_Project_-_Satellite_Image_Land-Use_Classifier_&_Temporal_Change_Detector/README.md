@@ -1,0 +1,233 @@
+# 🛰️ Satellite Land-Use Classifier & Temporal Change Detector
+
+## Overview
+
+This project implements an end-to-end computer vision system for satellite imagery that performs:
+
+- Land-use classification using Transfer Learning (ResNet-18)
+- Embedding-based temporal change detection
+- Interactive Streamlit dashboard for visual analysis
+
+The system classifies satellite images into land-use categories, compares images captured at two different time periods, computes embedding similarity, and detects significant land-cover changes.
+
+---
+
+# Features
+
+## Land-Use Classification
+
+- Transfer Learning using pretrained ResNet-18
+- Two-phase fine-tuning strategy
+- 10 EuroSAT land-use classes
+- Per-class F1 score
+- Macro F1 score
+- Confusion Matrix
+
+---
+
+## Temporal Change Detection
+
+- Feature extraction using ResNet-18 embeddings
+- 512-dimensional embedding vectors
+- Cosine similarity-based change detection
+- Automatic threshold selection using ROC analysis
+- Spatial change heatmaps
+
+---
+
+## Streamlit Dashboard
+
+The dashboard allows users to:
+
+- Upload BEFORE and AFTER satellite images
+- Predict land-use class
+- Display confidence scores
+- Compute cosine similarity
+- Detect significant land-cover change
+- Visualize patch-level spatial change heatmaps
+
+Runs completely offline after setup.
+
+---
+
+# Dataset
+
+Primary Dataset:
+
+- EuroSAT
+- 27,000 RGB satellite images
+- 10 land-use classes
+
+Classes:
+
+- AnnualCrop
+- Forest
+- HerbaceousVegetation
+- Highway
+- Industrial
+- Pasture
+- PermanentCrop
+- Residential
+- River
+- SeaLake
+
+---
+
+# Project Structure
+
+```
+satellite-cv-project/
+│
+├── bonus/
+├── change_detection/
+├── checkpoints/
+│   └── transfer_resnet18.pt
+├── dashboard/
+│   └── app.py
+├── data/
+├── evaluation/
+├── models/
+├── outputs/
+│   ├── confusion_matrix_eurosat_resnet18.png
+│   ├── roc_curve.png
+│   ├── threshold.txt
+│   ├── threshold_justification.md
+│   ├── region_pairs.json
+│   ├── region_embeddings.pt
+│   └── heatmaps/
+├── training/
+├── report/
+├── requirements.txt
+└── README.md
+```
+
+---
+
+# Installation
+
+## Clone Repository
+
+```bash
+git clone <repository-url>
+cd satellite-cv-project
+```
+
+---
+
+## Create Virtual Environment
+
+Windows
+
+```bash
+python -m venv venv
+```
+
+Activate
+
+```powershell
+venv\Scripts\activate
+```
+
+---
+
+## Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+# Training
+
+Train the transfer learning model
+
+```bash
+python training/train_transfer.py --data-root "data/raw/2750"
+```
+
+---
+
+# Generate Change Detection Outputs
+
+Generate temporal region pairs
+
+```bash
+python change_detection/temporal_split.py --data-root "data/raw/2750"
+```
+
+Generate embeddings
+
+```bash
+python change_detection/embeddings.py --checkpoint "checkpoints/transfer_resnet18.pt"
+```
+
+Run change detection
+
+```bash
+python change_detection/change_detector.py --checkpoint "checkpoints/transfer_resnet18.pt"
+```
+
+---
+
+# Run Dashboard
+
+```bash
+streamlit run dashboard/app.py
+```
+
+---
+
+# Results
+
+Transfer Learning:
+
+- Validation Accuracy: 92.25%
+- Macro F1 Score: 0.9202
+
+Change Detection:
+
+- ROC AUC: 0.940
+- Threshold selected using Youden's J Statistic
+
+Outputs Generated:
+
+- Confusion Matrix
+- ROC Curve
+- Heatmaps
+- Region Embeddings
+- Threshold Justification
+
+---
+
+# Technologies Used
+
+- Python
+- PyTorch
+- Torchvision
+- Streamlit
+- NumPy
+- Pandas
+- Matplotlib
+- Pillow
+- scikit-learn
+
+---
+
+# Future Improvements
+
+- Evaluation on additional satellite datasets
+- GradCAM visualization
+- Multi-threshold dashboard
+- UMAP/t-SNE embedding visualization
+- Improved spatial localization
+
+---
+
+# Author
+
+Riya Agrawal
+
+B.Tech Computer Science
+
+Swami Keshwanand Institute of Technology
